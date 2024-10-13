@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        th:fragment="parent(content,title,script)"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-th-replace="${title}">CD App</title>
+
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <!-- <link rel="stylesheet" data-th-href="@{'/css/style.css'}" /> -->
+
+    <!-- font awesome -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+</head>
+<body class="dark:bg-gray-900 bg-gray-100 dark:text-white">
+
+<!--NAVBAR-->
+<div>
+    <nav class="p-2 px-12 flex justify-between items-center bg-[#d1fafa] dark:bg-gray-900">
+        <a data-th-href="@{'/user/login'}" class="flex items-center gap-2">
+            <img src="/images/newlogo.png" class="object-cover max-w-12 max-h-12" alt="CD App Logo">
+            <span class="ml-3 text-2xl font-bold">College Directory</span>
+        </a>
+
+
+        <th:block th:if="${userToCheck != null}">
+        <a data-th-href="@{'/logout'}"> <button onclick="" type="button"
+                                                    class="flex gap-2 items-center border border-[#23b9c8] rounded text-black font-heading  hover:border-gray-600 rounded-lg text-sm
+                px-4 py-2 shadow-sm hover:shadow-lg font-medium dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <span class="text-black">Logout</span>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+        </a>
+        </th:block>
+
+        <th:block th:if="${userToCheck == null}">
+        <a data-th-href="@{'/user/login'}"> <button onclick="" type="button"
+                                                    class="flex gap-2 items-center border border-[#23b9c8] rounded text-black font-heading  hover:border-gray-600 rounded-lg text-sm
+                px-4 py-2 shadow-sm hover:shadow-lg font-medium dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <span class="text-black">Login/Signup</span>
+            <i class="fa-solid fa-arrow-right text-black"></i>
+        </button>
+        </a>
+        </th:block>
+    </nav>
+</div>
+
+<!-- HTML CONTENT GOES HERE -->
+<section data-th-replace="${content}"></section>
+
+
+
+<!-- ALL SCRIPTS COMES HERE -->
+
+<!-- FLOWBITE SCRIPT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script data-th-src="@{'/js/script.js'}"></script>
+
+<!--script data from pages -->
+<th:block data-th-replace="${script}"></th:block>
+</body>
+</html>

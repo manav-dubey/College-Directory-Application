@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html data-th-replace="~{base :: parent(~{::#maindiv},~{::title},~{::script})}">
+
+<head>
+    <title>Add Departments</title>
+</head>
+
+<body class="bg-gray-100">
+<div id="maindiv">
+    <!-- Page Container -->
+    <div class="min-h-auto flex justify-center pt-10">
+        <!-- Content Box -->
+        <div class="bg-white shadow-lg rounded-lg p-8 max-w-7xl w-full">
+
+            <h1 class="text-3xl font-bold text-center mb-8">Departments</h1>
+
+            <!-- Form to add/edit a department -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                <h2 class="text-xl font-semibold mb-4" th:text="${editMode} ? 'Edit Department' : 'Add New Department'">Add New Department</h2>
+
+                <form th:action="@{/departments/save}" method="post" class="flex space-x-4 items-center">
+                    <input type="hidden" name="id" th:value="${department?.id}"/>
+
+                    <div class="flex-1">
+                        <label for="name" class="block font-medium">Department Name:</label>
+                        <input type="text" id="name" name="name" th:value="${department?.name}" required
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div class="flex-1">
+                        <label for="description" class="block font-medium">Description:</label>
+                        <input type="text" id="description" name="description" th:value="${department?.description}" required
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div class="flex self-center mt-5">
+                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500">
+                            <span th:text="${editMode} ? 'Update' : 'Save'">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Table displaying the list of departments -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+                <h2 class="text-xl font-semibold mb-4">Existing Departments</h2>
+                <table class="table-auto w-full text-center">
+                    <thead>
+                    <tr class="bg-gray-200">
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Description</th>
+                        <th class="px-4 py-2">Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="department : ${departments}">
+                        <td class="border px-4 py-2" th:text="${department.id}"></td>
+                        <td class="border px-4 py-2" th:text="${department.name}"></td>
+                        <td class="border px-4 py-2" th:text="${department.description}"></td>
+                        <td class="border px-4 py-2">
+                            <a href="#" th:href="@{/departments/edit/{id}(id=${department.id})}"
+                               class="bg-yellow-300 text-white px-3 py-1 rounded-md hover:bg-yellow-300">Edit</a>
+<!--                            <a href="#" th:href="@{/departments/delete/{id}(id=${department.id})}"-->
+<!--                               class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-500">Delete</a>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <script></script>
+</div>
+</body>
+</html>
