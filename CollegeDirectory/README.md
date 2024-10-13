@@ -17,7 +17,7 @@ The College Directory Management System is a web-based application that streamli
 3. Dynamic Data Updates: All updates for departments, courses, and user roles are handled dynamically, ensuring real-time changes without the need for page reloads.
 # Technologies Used
 - Backend: Spring Boot, Spring Data JPA, Spring Security
-- Frontend: Thymeleaf, Tailwind CSS
+- Frontend: Reactjs, Tailwind CSS
 - Database: MySQL
 - Validation: Spring Validation
-- Other Tools: Lombok, IntelliJ IDEA, Maven
+- Other Tools: Eclipse , Maven
