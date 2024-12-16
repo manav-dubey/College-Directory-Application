@@ -20,4 +20,4 @@ The College Directory Management System is a web-based application that streamli
 - Frontend: Thymeleaf, Tailwind CSS
 - Database: MySQL
 - Validation: Spring Validation
-- Other Tools: Eclipse , Maven
+- Other Tools: Lombok, IntelliJ IDEA, Maven

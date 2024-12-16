@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html data-th-replace="~{base :: parent(~{::#maindiv},~{::title},~{::script})}">
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+<div id="maindiv">
+
+
+
+    <div class="min-h-screen bg-gray-100 text-gray-900 flex items-center justify-center px-5 py-5">
+        <div class="max-w-[1300px] overflow-hidden rounded-1xl bg-white shadow sm:rounded-lg flex justify-center flex-1">
+
+            <!-- company logo name -->
+            <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+                <div class="flex flex-row items-center justify-center gap-3">
+                    <img src="/images/newlogo.png" class="object-cover max-w-12 max-h-12" alt="CD App Logo">
+                    <span class="text-4xl font-semibold text-black font-heading dark:text-white">CD App</span>
+                </div>
+
+                <!-- border  -->
+                <div class="my-6 border-b text-center">
+                </div>
+
+                <!-- message here -->
+
+                <div data-th-replace="~{message::messagebox}"></div>
+
+                <div>
+                    <h1 class="text-3xl font-semibold font-heading text-center">Login Here</h1>
+                </div>
+
+                <div class="text-red-600 text-center my-3" data-th-if="${param.error}">
+                    Invalid username and password.
+                </div>
+
+                <div class="text-green-600 text-center my-3" data-th-if="${param.logout}">
+                    Logout Successfully.
+                </div>
+
+                <div class="mt-1 flex flex-col items-center">
+                    <div class="w-full flex-1 mt-8">
+
+                        <form
+                                method="post"
+                                data-th-action="@{'/authenticate'}"
+                                class="mt-5"
+                        >
+                        <div class="mx-auto max-w-xs">
+                            <input name="username"
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500
+                                    text-sm focus:outline-none focus:border-[#23b9c8] focus:bg-white"
+                                    placeholder="Username or Email" required />
+                            <input name="password"
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-[#23b9c8] focus:bg-white mt-5"
+                                    type="password" placeholder="Password" required/>
+
+                            <a>
+                                <button type="submit"
+                                        class="mt-5 tracking-wide font-semibold text-[18px] bg-[#23b9c8] text-white w-full py-4 rounded-lg hover:bg-[#c1e9e9] border hover:text-black hover:border-gray-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                    <span class="">
+                                            Login
+                                        </span>
+                                </button>
+                            </a>
+                        </div>
+                        </form>
+                        <div class="mx-auto max-w-xs mt-10">
+                            <p class="text-[14px] mx-2 font-heading font-medium text-gray-700">Don't Have Account Register Below
+                            </p>
+                            <a data-th-href="@{'/user/signup'}">
+                                <button
+                                        class="mt-3 tracking-wide font-semibold text-[16px] bg-white text-black border border-[#23b9c8] w-full py-3 rounded-lg hover:bg-[#c1e9e9] border hover:text-black hover:border-gray-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                    <span class="">
+                                            Register Now
+                                        </span>
+                                </button>
+                            </a>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 bg-[#c1e9e9] text-center hidden lg:flex">
+                <div class="m-8 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
+                     style="background-image: url('/images/heroimg.webp');">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script></script>
+</body>
+
+</html>

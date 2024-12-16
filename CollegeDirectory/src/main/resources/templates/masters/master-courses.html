@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html data-th-replace="~{base :: parent(~{::#maindiv},~{::title},~{::script})}">
+
+<head>
+  <title>Courses</title>
+</head>
+
+<body class="bg-gray-100">
+<div id="maindiv">
+  <!-- Page Container -->
+  <div class="min-h-auto flex justify-center pt-10">
+    <!-- Content Box -->
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-7xl w-full">
+
+      <h1 class="text-3xl font-bold text-center mb-8">Courses</h1>
+
+      <!-- Form to add/edit a course -->
+      <div class="bg-gray-50 p-6 rounded-lg mb-8">
+        <h2 class="text-xl font-semibold mb-4" th:text="${editMode} ? 'Edit Course' : 'Add New Course'">Add New Course</h2>
+
+        <form th:action="@{/courses/save}" method="post" class="flex space-x-4 items-center">
+          <input type="hidden" name="id" th:value="${course?.id}"/>
+
+          <!-- Course Name -->
+          <div class="flex-1">
+            <label for="name" class="block font-medium">Course Name:</label>
+            <input type="text" id="name" name="title" th:value="${course?.title}" required
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+
+          <!-- Course Description -->
+          <div class="flex-1">
+            <label for="description" class="block font-medium">Description:</label>
+            <input type="text" id="description" name="description" th:value="${course?.description}" required
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+
+          <!-- Department Dropdown -->
+          <div class="flex-1">
+            <label for="department" class="block font-medium">Department:</label>
+            <select id="department" name="departmentId" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+              <option value="" disabled th:selected="${course?.department == null}">Select Department</option>
+              <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}" th:selected="${course?.department?.id == department.id}"></option>
+            </select>
+          </div>
+
+          <!-- Save Button -->
+          <div class="flex self-center mt-5">
+            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500">
+              <span th:text="${editMode} ? 'Update' : 'Save'">Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Table displaying the list of courses -->
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-semibold mb-4">Existing Courses</h2>
+        <table class="table-auto w-full text-center">
+          <thead>
+          <tr class="bg-gray-200">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Course Name</th>
+            <th class="px-4 py-2">Description</th>
+            <th class="px-4 py-2">Department</th>
+            <th class="px-4 py-2">Edit</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="course : ${courses}">
+            <td class="border px-4 py-2" th:text="${course.id}"></td>
+            <td class="border px-4 py-2" th:text="${course.title}"></td>
+            <td class="border px-4 py-2" th:text="${course.description}"></td>
+            <td class="border px-4 py-2" th:text="${course.department.name}"></td>
+            <td class="border px-4 py-2">
+              <a th:href="@{/courses/edit/{id}(id=${course.id})}"
+                 class="bg-yellow-300 text-white px-3 py-1 rounded-md hover:bg-yellow-300">Edit</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <script></script>
+</div>
+</body>
+
+</html>

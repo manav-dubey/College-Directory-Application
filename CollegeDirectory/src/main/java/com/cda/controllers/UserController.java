@@ -38,7 +38,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    public UserController(UserServices userService) {
+    public UserController(UserServices userService)
+    {
         this.userService = userService;
     }
 

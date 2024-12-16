@@ -1,10 +1,12 @@
 package com.cda.controllers;
 
 import com.cda.configs.CustomeUserDetails;
+import com.cda.entities.Course;
 import com.cda.entities.FacultyProfile;
 import com.cda.entities.StudentProfile;
 import com.cda.entities.Users;
 import com.cda.payload.UserDto;
+import com.cda.repositries.CourseRepository;
 import com.cda.repositries.UserRepository;
 import com.cda.services.FacultyService;
 import org.modelmapper.ModelMapper;
@@ -29,6 +31,9 @@ public class FacultyController {
 
     @Autowired
     private FacultyService facultyService;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -102,5 +107,11 @@ public class FacultyController {
         return "faculty/class-list"; // Name of the Thymeleaf template
     }
 
+    // Method to fetch courses based on the selected department
+    @GetMapping("/courses/{departmentId}")
+    @ResponseBody
+    public List<Course> getCoursesByDepartment(@PathVariable Long departmentId) {
+        return courseRepository.findByDepartmentId(departmentId);
+    }
 
 }

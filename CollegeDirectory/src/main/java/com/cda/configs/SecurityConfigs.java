@@ -55,7 +55,7 @@ public class SecurityConfigs {
 
 
         httpSecurity.formLogin(formLogin -> {
-                    formLogin.loginPage("/user/login").permitAll();
+            formLogin.loginPage("/user/login").permitAll();
                     formLogin.loginProcessingUrl("/authenticate");
                     formLogin.successHandler(customSuccessHandler);
                     formLogin.usernameParameter("username");
@@ -77,7 +77,14 @@ public class SecurityConfigs {
                 }
         );
 
+        // Redirect unauthorized users to the access-denied page
+        httpSecurity.exceptionHandling(exception -> {
+            exception.accessDeniedPage("/access-denied"); // Redirect to custom warning page
+        });
+
+        // Disable CSRF for simplicity in development
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
+
 
 //        httpSecurity.logout(logoutForm -> {
 //            logoutForm.logoutUrl("/logout");
